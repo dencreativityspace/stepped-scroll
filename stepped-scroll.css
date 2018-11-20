@@ -1,0 +1,62 @@
+:root {
+  --duration: 0.5s;
+}
+.scrollable {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+.scrollable .scroll {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: inline-block;
+  width: 99%;
+  height: 0;
+  -webkit-transform: translateY(100%);
+      -ms-transform: translateY(100%);
+          transform: translateY(100%);
+  opacity: 0;
+  -webkit-transition: opacity var(--duration), -webkit-transform var(--duration);
+  transition: opacity var(--duration), -webkit-transform var(--duration);
+  -o-transition: transform var(--duration), opacity var(--duration);
+  transition: transform var(--duration), opacity var(--duration);
+  transition: transform var(--duration), opacity var(--duration), -webkit-transform var(--duration);
+}
+.scrollable .scroll.current {
+  -webkit-transform: translateY(0) !important;
+      -ms-transform: translateY(0) !important;
+          transform: translateY(0) !important;
+  opacity: 1;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+  -webkit-transition: opacity var(--duration) 0.1s, -webkit-transform var(--duration) 0.1s;
+  transition: opacity var(--duration) 0.1s, -webkit-transform var(--duration) 0.1s;
+  -o-transition: transform var(--duration) 0.1s, opacity var(--duration) 0.1s;
+  transition: transform var(--duration) 0.1s, opacity var(--duration) 0.1s;
+  transition: transform var(--duration) 0.1s, opacity var(--duration) 0.1s, -webkit-transform var(--duration) 0.1s;
+}
+.scrollable .scroll.current:not(.unactivable) {
+  position: relative;
+}
+.scrollable .scroll.current:not(.unactivable).active {
+  max-height: 100%;
+  overflow: auto;
+}
+.scrollable .scroll.current:not(.unactivable).active .close-active-post {
+  z-index: 10;
+}
+.scrollable .scroll.prev {
+  -webkit-transform: translateY(-100%);
+      -ms-transform: translateY(-100%);
+          transform: translateY(-100%);
+}
+.scrollable.gpu-render .scroll {
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-perspective: 1000;
+          perspective: 1000;
+}
