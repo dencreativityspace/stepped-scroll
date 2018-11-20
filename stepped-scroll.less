@@ -1,0 +1,53 @@
+:root {
+    --duration: 0.5s;
+}
+
+.scrollable {
+    box-sizing: border-box;
+    overflow: hidden !important;
+    padding: 0 !important;
+    
+    .scroll {
+        box-sizing: border-box;
+        display: inline-block;
+        width: 99%;
+        height: 0;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: transform var(--duration), opacity var(--duration);
+
+        &.current {
+            transform: translateY(0) !important;
+            opacity: 1;
+            height: 100%;
+            max-height: 100vh;
+            overflow: hidden;
+            transition: transform var(--duration) 0.1s, opacity var(--duration) 0.1s;
+            
+            &:not(.unactivable) {
+                position: relative;
+                
+                &.active {
+                    max-height: 100%;
+                    overflow: auto;
+                    
+                    .close-active-post {
+                        z-index: 10;
+                    }
+                }
+            }
+        }
+        
+        &.prev {
+            transform: translateY(-100%);
+        }
+    }
+    
+    &.gpu-render {
+        .scroll {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000;
+        }
+    }
+}
